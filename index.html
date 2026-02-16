@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Tab</title>
+    <style>
+        /* General Reset */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #010015; /* Your requested color */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 5px 15px;
+            transition: all 0.3s ease;
+            width: 500px;
+            max-width: 90%;
+        }
+
+        .search-container:focus-within {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        /* The Engine Selector */
+        select {
+            background: transparent;
+            color: #888;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            font-size: 14px;
+            padding-right: 10px;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            margin-right: 10px;
+        }
+
+        /* The Input Field */
+        input[type="text"] {
+            flex-grow: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: white;
+            font-size: 16px;
+            padding: 10px;
+        }
+
+        input::placeholder {
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="search-container">
+        <select id="engine-selector">
+            <option value="https://duckduckgo.com/?q=" selected>DuckDuckGo</option>
+            <option value="https://www.google.com/search?q=">Google</option>
+            <option value="https://search.brave.com/search?q=">Brave</option>
+            <option value="https://www.startpage.com/do/search?query=">Startpage</option>
+        </select>
+        
+        <form id="search-form" style="display: flex; flex-grow: 1;">
+            <input type="text" id="search-input" placeholder="Search the web..." autofocus autocomplete="off">
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById('search-form');
+        const input = document.getElementById('search-input');
+        const engine = document.getElementById('engine-selector');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault(); // Prevents the page from refreshing
+            const query = input.value;
+            if (query.trim() !== "") {
+                // Combines the engine URL with your search text
+                window.location.href = engine.value + encodeURIComponent(query);
+            }
+        });
+    </script>
+
+</body>
+</html>
